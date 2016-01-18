@@ -25,6 +25,10 @@
 //     http://www.ftdichip.com/Documents/AppNotes/AN2232C-01_MPSSE_Cmnd.pdf
 // Xilinx Series7 Configuation documented at:
 //     ug470_7Series_Config.pdf
+//     http://www.xilinx.com/support/documentation/user_guides/ug470_7Series_Config.pdf
+// Spartan 6 
+//     ug380.pdf
+//     http://www.xilinx.com/support/documentation/user_guides/ug380.pdf
 // ARM JTAG-DP registers documented at:
 //     DDI0314H_coresight_components_trm.pdf
 // ARM DPACC/APACC programming documented at:
