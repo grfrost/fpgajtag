@@ -347,10 +347,27 @@ USB_INFO *fpgausb_init(void)
             usbinfo_array[usbinfo_array_index].idProduct = desc.idProduct;
             usbinfo_array[usbinfo_array_index].bcdDevice = desc.bcdDevice;
             usbinfo_array[usbinfo_array_index].bNumConfigurations = desc.bNumConfigurations;
-            if (libusb_open(dev, &usbhandle) < 0
-             || UDESC(iManufacturer) < 0 || UDESC(iProduct) < 0 || UDESC(iSerialNumber) < 0) {
-                printf("Error getting USB device attributes\n");
+            if (libusb_open(dev, &usbhandle) < 0){
+                printf("Error opening USB device\n");
                 exit(-1);
+            }
+            if (libusb_get_string_descriptor_ascii(usbhandle, 
+               desc.iManufacturer, 
+               usbinfo_array[usbinfo_array_index].iManufacturer,
+               sizeof(usbinfo_array[usbinfo_array_index].iManufacturer))<0){
+                strcpy(usbinfo_array[usbinfo_array_index].iManufacturer, "unknown manufacturer");
+            }
+            if (libusb_get_string_descriptor_ascii(usbhandle, 
+               desc.iProduct, 
+               usbinfo_array[usbinfo_array_index].iProduct,
+               sizeof(usbinfo_array[usbinfo_array_index].iProduct))<0){
+                strcpy(usbinfo_array[usbinfo_array_index].iProduct, "unknown product");
+            }
+            if (libusb_get_string_descriptor_ascii(usbhandle, 
+               desc.iSerialNumber, 
+               usbinfo_array[usbinfo_array_index].iSerialNumber,
+               sizeof(usbinfo_array[usbinfo_array_index].iSerialNumber))<0){
+                strcpy(usbinfo_array[usbinfo_array_index].iSerialNumber, "unknown serial number");
             }
             libusb_close (usbhandle);
             usbhandle = NULL;
